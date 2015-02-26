@@ -5,34 +5,23 @@
 FUNÇÕES PADRÕES START
 *********************************************************************/
 .border-radius(@style) {
-    -webkit-border-radius: @style;
-    -moz-border-radius: @style;
-    border-radius: @style;
+	-webkit-border-radius: @style;
+	-moz-border-radius: @style;
+	border-radius: @style;
 }
 .box-shadow(@style, @c) when (iscolor(@c)) {
-    -webkit-box-shadow: @style @c;
-    box-shadow:         @style @c;
+	-webkit-box-shadow: @style @c;
+	box-shadow:         @style @c;
 }
 .box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
-    .box-shadow(@style, rgba(0, 0, 0, @alpha));
+	.box-shadow(@style, rgba(0, 0, 0, @alpha));
 }
 
 .clear, .first{
-    clear:both;
+	clear:both;
 }
 /*********************************************************************
 FUNÇÕES PADRÕES END
-*/
-/*
-NON-RESPONSIVE START
-**********************************************************************************************/
-/* ALTERAR APENAS ESTAS VARIAVEIS DE ACORDO COM O PROJETO START */
-.container {max-width: none !important;width: 960px;}
-.navbar-nav > li > a {padding-top: 20px;padding-bottom:20px;}
-/* ALTERAR APENAS ESTAS VARIAVEIS DE ACORDO COM O PROJETO END */
-/* Finesse the page header spacing */.page-header {margin-bottom: 30px;}.page-header .lead {margin-bottom: 10px;}/* Non-responsive overrides** Utilitze the following CSS to disable the responsive-ness of the container,* grid system, and navbar.*//* Reset the container *//* Always float the navbar header */.navbar-header {float: left;}/* Undo the collapsing navbar */.navbar-collapse {display: block !important;height: auto !important;padding-bottom: 0;overflow: visible !important;}.navbar-toggle {display: none;}.navbar-collapse {border-top: 0;}.navbar-brand {margin-left: -15px;}/* Always apply the floated nav */.navbar-nav {float: left;margin: 0;}.navbar-nav > li {float: left;}/* Redeclare since we override the float above */.navbar-nav.navbar-right {float: right;}/* Undo custom dropdowns */.navbar .navbar-nav .open .dropdown-menu {position: absolute;float: left;background-color: #fff;border: 1px solid #cccccc;border: 1px solid rgba(0, 0, 0, 0.15);border-width: 0 1px 1px;border-radius: 0 0 4px 4px;-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);}.navbar-default .navbar-nav .open .dropdown-menu > li > a {color: #333;}.navbar .navbar-nav .open .dropdown-menu > li > a:hover,.navbar .navbar-nav .open .dropdown-menu > li > a:focus,.navbar .navbar-nav .open .dropdown-menu > .active > a,.navbar .navbar-nav .open .dropdown-menu > .active > a:hover,.navbar .navbar-nav .open .dropdown-menu > .active > a:focus {color: #fff !important;background-color: @primary-color !important;}.navbar .navbar-nav .open .dropdown-menu > .disabled > a,.navbar .navbar-nav .open .dropdown-menu > .disabled > a:hover,.navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {color: #999 !important;background-color: transparent !important;}
-/**********************************************************************************************
-NON-RESPONSIVE END
 */
 ::selection {background-color: @primary-color;color: #FFF;}
 ::-moz-selection {background-color: @primary-color;color: #FFF;}
@@ -53,12 +42,19 @@ ESTRUTURA START
 **********************************************************************************************/
 .extra-header {
 	.site-header {}
-	.navbar {border:0;margin:0;}
+	.navbar {
+		border:0;margin:0;
+		.navbar-toggle {
+			border-color:#FFF;
+			.icon-bar {background-color:#FFF;}
+			&:focus, &:hover, &:active {background-color:@primary-color;border-color:transparent;}
+		}
+	}
 	.navbar-brand {height: auto;padding-top:32px;}
 	.navbar-nav {
 		text-transform: uppercase;font-size: 14px;
 		> li {
-			a {padding:20px 10px;}
+			a {padding:20px 18px;}
 			+ li {background: url(../imagem/site/bg-menu-item.gif) no-repeat left center;padding-left:3px;}
 			&.home {
 				&.active {
@@ -119,7 +115,7 @@ CLASSES START
 		position: relative;z-index: 1;
 		li {background: no-repeat center top;}
 	}
-	.content {padding-top:36px;padding-left:480px;}
+	.content {padding-top:36px;}
 	.text {height: 242px;font-size: 19px;}
 	.title {margin-bottom: 30px;font-size: 35px;}
 	.desc {line-height: 1.2;}
@@ -137,10 +133,10 @@ CLASSES START
 	position: relative;margin-top:-180px;background: url(../imagem/site/bg-destaques.png) no-repeat center bottom;z-index: 2;margin-bottom: 60px;
 	&, .destaque {height: 230px;}
 	.destaque {
-		width: 310px;background:no-repeat left top;float: left;
+		width: 33.33333333333333%;background:no-repeat center top;float: left;
 		&, a {color: #FFF;}
 		&.left {background-image:url(../imagem/site/destaque-cartao.png);}
-		&.mid {width: 320px;background-image:url(../imagem/site/destaque-custo.png);}
+		&.mid {;background-image:url(../imagem/site/destaque-custo.png);}
 		&.right {background-image:url(../imagem/site/destaque-peca.png);}
 		.content {padding:96px 20px 0;height: 180px;text-align: center;}
 		.title {margin:0 0 6px;font-size: 20px;text-transform: uppercase;}
@@ -206,15 +202,96 @@ JQUERY UI END
 @media print {
 
 }
+@media (max-width: 991px) {
+	.box-destaques {
+		.destaque {
+			.title {font-size: 15px;}
+			.desc {line-height:1.1;font-size: 12px;}
+		}
+	}
+	.box-sobre {
+		.chamada {
+			margin-bottom: 40px;text-align: center;
+			.content {min-height: auto;}
+		}
+	}
+}
 @media (max-width: 767px) {
- /*    .site-geral:before {content:"TABLET";}*/
+	.extra-header {
+		.navbar-nav {
+			> li {
+				+ li {padding-left:0;background: none;}
+			}
+		}
+		.header-left, .header-right, .navbar-header {text-align: center;}
+		.navbar-brand {float: none;display: inline-block;}
+		.menu-header {
+			display: inline-block;margin:0 0 15px;font-size: 14px;
+			> li {
+				padding:10px 0;
+				a {padding:0 15px;}
+			}
+		}
+	}
+	.box-banner {
+		.content {padding-top:36px;}
+		.text {height: auto;font-size: 14px;}
+		.title {font-size: 20px;}
+	}
+	.box-destaques {
+		height: auto;
+		.destaque {
+			float: none;display: block;width: 100%;margin-bottom: 20px;
+			.title {font-size: 15px;}
+			.desc {font-size: 14px;}
+		}
+	}
 }
 @media (max-width: 480px) {
- /*#GERAL:before {content:"MOBILE";}*/
+	.extra-header {
+		.navbar-nav {
+			> li {
+				a {padding:10px 10px}
+			}
+		}
+		.menu-header {
+			font-size: 12px;
+			> li {
+				padding:10px 0;
+				a {padding:0 10px;}
+			}
+		}
+	}
+	.box-banner {
+		.cycle-nav {bottom:182px;}
+	}
 }
 @media (min-width: 768px) and (max-width: 980px) {
-
+	.extra-header {
+		.navbar-brand {
+			img {max-width: 300px;}
+		}
+		.navbar-nav {
+			font-size: 11px;
+			> li {
+				a {padding:20px 6px}
+			}
+		}
+		.menu-header {
+			font-size: 14px;
+			> li {
+				a {padding:0 5px;}
+			}
+		}
+	}
 }
 @media (min-width: 981px) and (max-width: 1200px) {
- /*#GERAL:before {content:"ACIMA DE TABLET";}*/
+	.extra-header {
+		.navbar-nav {
+			> li {
+				a {padding:20px 10px}
+			}
+		}
+	}
+
 }
